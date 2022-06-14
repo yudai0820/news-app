@@ -3,6 +3,7 @@ import WebView from 'react-native-webview';
 import { StyleSheet, SafeAreaView, Text, TouchableOpacity } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 
+import Loading from '../components/Loading';
 import StarButton from '../components/StarButton';
 import { addStar, deleteStar } from '../store/actions/user';
 
@@ -35,7 +36,11 @@ export default ArticleScreen = ({ route }) => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <WebView source={{ uri: article.url }} />
+      <WebView
+        source={{ uri: article.url }}
+        startInLoadingState={true}
+        renderLoading={() => <Loading />}
+      />
       <StarButton onPress={toggleStar} enabled={isStarped()} />
     </SafeAreaView>
   );
